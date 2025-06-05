@@ -38,4 +38,6 @@ def definiteness(matrix):
     elif neg_eig + zero_eig == len(eigenvalues) and neg_eig > 0:
         return "Negative semi-definite"
     elif pos_eig > 0 and neg_eig > 0:
-
+        return "Indefinite"
+    else:
+        return None
