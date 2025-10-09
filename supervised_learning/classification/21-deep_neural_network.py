@@ -103,7 +103,7 @@ class DeepNeuralNetwork:
         """ Evaluate the neural network
 
         Args:
-            X (numpy.array): Input array
+           X (numpy.array): Input array
             Y (numpy.array): Actual values
 
         Returns:
@@ -124,7 +124,6 @@ class DeepNeuralNetwork:
             alpha (float): learning rate
         """
         m = Y.shape[1]
-        
         for i in range(self.L, 0, -1):
 
             A_prev = cache["A" + str(i - 1)]
@@ -139,6 +138,4 @@ class DeepNeuralNetwork:
             dw = np.matmul(dz, A_prev.T) / m
             da = np.matmul(W.T, dz)
             self.__weights['W' + str(i)] -= (alpha * dw)
-            self.__weights['b' + str(i)] -= (alpha * db)
-            
-    
+            self.__weights['b' + str(i)] -= (alpha * db)    
