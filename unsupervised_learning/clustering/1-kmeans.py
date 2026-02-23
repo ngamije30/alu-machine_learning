@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Module for performing K-means clustering."""
 import numpy as np
-initialize = __import__('0-initialize').initialize
 
 
 def kmeans(X, k, iterations=1000):
@@ -24,16 +23,16 @@ def kmeans(X, k, iterations=1000):
     if not isinstance(iterations, int) or iterations <= 0:
         return None, None
     n, d = X.shape
-    C = initialize(X, k)
-    if C is None:
-        return None, None
+    low = X.min(axis=0)
+    high = X.max(axis=0)
+    C = np.random.uniform(low, high, size=(k, d))
     for _ in range(iterations):
         diffs = X[:, np.newaxis, :] - C[np.newaxis, :, :]
         dists = np.linalg.norm(diffs, axis=2)
         clss = np.argmin(dists, axis=1)
         C_new = np.array([
             X[clss == j].mean(axis=0) if np.any(clss == j)
-            else np.random.uniform(X.min(axis=0), X.max(axis=0))
+            else np.random.uniform(low, high)
             for j in range(k)
         ])
         if np.allclose(C, C_new):
