@@ -30,9 +30,14 @@ def expectation(X, pi, m, S):
     k = pi.shape[0]
     if m.shape != (k, d) or S.shape != (k, d, d):
         return None, None
+    if np.any(pi < 0) or not np.isclose(np.sum(pi), 1):
+        return None, None
     g = np.zeros((k, n))
     for i in range(k):
-        g[i] = pi[i] * pdf(X, m[i], S[i])
+        p = pdf(X, m[i], S[i])
+        if p is None:
+            return None, None
+        g[i] = pi[i] * p
     total = g.sum(axis=0)
     g = g / total
     log_likelihood = np.sum(np.log(total))
