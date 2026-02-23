@@ -23,12 +23,12 @@ def forward(Observation, Emission, Transition, Initial):
         T = Observation.shape[0]
 
         # F == alpha
-        # initialization α1(j) = πjbj(o1) 1 ≤ j ≤ N
+        # initialization Î±1(j) = Ï€jbj(o1) 1 â‰¤ j â‰¤ N
         F = np.zeros((N, T))
         F[:, 0] = Initial.T * Emission[:, Observation[0]]
 
         # formula shorturl.at/amtJT
-        # Recursion αt(j) == ∑Ni=1 αt−1(i)ai jbj(ot); 1≤j≤N,1<t≤T
+        # Recursion Î±t(j) == âˆ‘Ni=1 Î±tâˆ’1(i)ai jbj(ot); 1â‰¤jâ‰¤N,1<tâ‰¤T
         for t in range(1, T):
             for n in range(N):
                 Transitions = Transition[:, n]
@@ -36,9 +36,8 @@ def forward(Observation, Emission, Transition, Initial):
                 F[n, t] = np.sum(Transitions * F[:, t - 1]
                                  * Emissions)
 
-        # Termination P(O|λ) == ∑Ni=1 αT (i)
+        # Termination P(O|Î») == âˆ‘Ni=1 Î±T (i)
         P = np.sum(F[:, -1])
         return P, F
     except Exception:
         None, None
-        

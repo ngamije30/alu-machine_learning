@@ -27,4 +27,3 @@ def backward(Observation, Emission, Transition, Initial):
         return P, beta
     except Exception:
         return None, None
-    

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+"""Module for determining if a Markov chain is absorbing."""
 import numpy as np
+
 
 def absorbing(P):
     """
