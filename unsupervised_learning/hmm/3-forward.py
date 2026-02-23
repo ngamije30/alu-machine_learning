@@ -41,3 +41,4 @@ def forward(Observation, Emission, Transition, Initial):
         return P, F
     except Exception:
         None, None
+        
