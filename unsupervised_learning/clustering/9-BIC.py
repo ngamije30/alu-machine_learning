@@ -53,9 +53,9 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
         log_likelihoods.append(log_l)
         bic_values.append(bic)
         results.append((pi, m, S))
-    l = np.array(log_likelihoods)
+    likelihoods = np.array(log_likelihoods)
     b = np.array(bic_values)
     best_idx = np.argmin(b)
     best_k = kmin + best_idx
     best_result = results[best_idx]
-    return best_k, best_result, l, b
+    return best_k, best_result, likelihoods, b
