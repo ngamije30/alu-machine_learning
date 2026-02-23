@@ -24,7 +24,7 @@ def maximization(X, g):
     k = g.shape[0]
     if g.shape[1] != n:
         return None, None, None
-    if np.any(g < 0) or np.any(g > 1):
+    if np.any(g < 0):
         return None, None, None
     n_k = g.sum(axis=1)
     pi = n_k / n
