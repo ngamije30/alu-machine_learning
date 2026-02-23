@@ -17,6 +17,8 @@ def variance(X, C):
         return None
     if not isinstance(C, np.ndarray) or C.ndim != 2:
         return None
+    if X.shape[1] != C.shape[1]:
+        return None
     diffs = X[:, np.newaxis, :] - C[np.newaxis, :, :]
     dists = np.linalg.norm(diffs, axis=2)
     min_dists = np.min(dists, axis=1)
